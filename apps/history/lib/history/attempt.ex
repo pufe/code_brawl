@@ -13,7 +13,7 @@ defmodule History.Attempt do
   @required_fields ~w()
   @optional_fields ~w(time status source challenge team)
 
-  def changeset(record, params \\ :empty) do
+  def changeset(record, params \\ %{}) do
     cast(record, params, @required_fields ++ @optional_fields)
   end
 end

@@ -10,7 +10,7 @@ defmodule History.Selection do
   @required_fields ~w()
   @optional_fields ~w(contest challenge)
 
-  def changeset(record, params \\ :empty) do
+  def changeset(record, params \\ %{}) do
     cast(record, params, @required_fields ++ @optional_fields)
   end
 end
