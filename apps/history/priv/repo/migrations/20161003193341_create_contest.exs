@@ -22,7 +22,7 @@ defmodule History.Repo.Migrations.CreateContest do
 
     create table(:teams) do
       add :name, :string
-      add :password_hash, :string
+      add :password, :string
     end
 
     create table(:attempts) do

@@ -4,12 +4,12 @@ defmodule History.Team do
 
   schema "teams" do
     field :name, :string
-    field :password_hash, :string
+    field :password, :string
     has_many :attempts, History.Attempt
   end
 
   @required_fields ~w()
-  @optional_fields ~w(name password_hash)
+  @optional_fields ~w(name password)
 
   def changeset(record, params \\ %{}) do
     cast(record, params, @required_fields ++ @optional_fields)
