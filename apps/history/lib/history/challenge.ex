@@ -4,7 +4,7 @@ defmodule History.Challenge do
 
   schema "challenges" do
     field :name, :string
-    field :description, :text
+    field :description, :string
     field :time_limit, :integer
     field :test_count, :integer
     has_many :attempts, History.Attempt

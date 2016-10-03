@@ -4,8 +4,8 @@ defmodule History.Repo.Migrations.CreateContest do
   def change do
     create table(:contests) do
       add :name, :string
-      add :start, Ecto.DateTime
-      add :finish, Ecto.DateTime
+      add :start, :timestamp
+      add :finish, :timestamp
     end
 
     create table(:challenges) do
@@ -16,21 +16,21 @@ defmodule History.Repo.Migrations.CreateContest do
     end
 
     create table(:selections) do
-      add :contest_id, references(:contest)
-      add :challenge_id, references(:challenge)
-    end
-
-    create table(:attempts) do
-      add :time, Ecto.DateTime
-      add :team_id, references(:teams)
+      add :contest_id, references(:contests)
       add :challenge_id, references(:challenges)
-      add :status, :string
-      add :source, :text
     end
 
     create table(:teams) do
       add :name, :string
       add :password_hash, :string
+    end
+
+    create table(:attempts) do
+      add :time, :timestamp
+      add :team_id, references(:teams)
+      add :challenge_id, references(:challenges)
+      add :status, :string
+      add :source, :text
     end
   end
 end

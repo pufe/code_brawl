@@ -5,7 +5,7 @@ defmodule History.Attempt do
   schema "attempts" do
     field :time, Ecto.DateTime
     field :status, :string
-    field :source, :text
+    field :source, :string
     belongs_to :challenge, History.Challenge
     belongs_to :team, History.Team
   end
