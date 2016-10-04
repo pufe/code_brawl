@@ -16,6 +16,7 @@ defmodule Arena.Test do
   end
 
   def send_input(conn, challenge, test_number) do
+    :gen_tcp.send(conn, "Test:\n")
     file_path = Path.join(["./problem", challenge.name, "input#{test_number}"])
     file = File.open!(file_path, [:read])
     write_file(conn, file)
