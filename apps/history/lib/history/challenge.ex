@@ -16,6 +16,5 @@ defmodule History.Challenge do
 
   def changeset(record, params \\ %{}) do
     cast(record, params, @required_fields ++ @optional_fields)
-    |> cast_assoc(:contest)
   end
 end
