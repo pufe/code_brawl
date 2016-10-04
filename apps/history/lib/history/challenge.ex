@@ -8,8 +8,7 @@ defmodule History.Challenge do
     field :time_limit, :integer
     field :test_count, :integer
     has_many :attempts, History.Attempt
-    has_many :selections, History.Selection
-    many_to_many :contests, History.Contest, join_through: History.Selection
+    belongs_to :contest, History.Contest
   end
 
   @required_fields ~w()
@@ -17,5 +16,6 @@ defmodule History.Challenge do
 
   def changeset(record, params \\ %{}) do
     cast(record, params, @required_fields ++ @optional_fields)
+    |> cast_assoc(:contest)
   end
 end

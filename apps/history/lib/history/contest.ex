@@ -7,15 +7,15 @@ defmodule History.Contest do
     field :name, :string
     field :start, Ecto.DateTime
     field :finish, Ecto.DateTime
-    has_many :selections, History.Selection
-    many_to_many :challenges, History.Challenge, join_through: History.Selection
+    has_many :challenges, History.Challenge
   end
 
   @required_fields ~w()
-  @optional_fields ~w(name start finish selections challenges)
+  @optional_fields ~w(name start finish)
 
   def changeset(record, params \\ %{}) do
     cast(record, params, @required_fields ++ @optional_fields)
+    |> cast_assoc(:challenges)
   end
 
   def at_timestamp(timestamp) do

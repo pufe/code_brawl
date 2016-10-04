@@ -13,11 +13,7 @@ defmodule History.Repo.Migrations.CreateContest do
       add :description, :text
       add :time_limit, :integer
       add :test_count, :integer
-    end
-
-    create table(:selections) do
       add :contest_id, references(:contests)
-      add :challenge_id, references(:challenges)
     end
 
     create table(:teams) do
