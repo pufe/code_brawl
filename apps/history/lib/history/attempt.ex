@@ -11,7 +11,7 @@ defmodule History.Attempt do
   end
 
   @required_fields ~w()
-  @optional_fields ~w(time status source challenge team)
+  @optional_fields ~w(time status source challenge_id team_id)
 
   def changeset(record, params \\ %{}) do
     cast(record, params, @required_fields ++ @optional_fields)
@@ -19,8 +19,12 @@ defmodule History.Attempt do
 
   def create(params = %{team: %History.Team{},
                         challenge: %History.Challenge{},
-                        status: _status}) do
-    History.Repo.insert!(changeset(%History.Attempt{}, params))
+                        status: _status,
+                        time: _time}) do
+    params
+    |> Map.merge(%{team_id: params.team.id, challenge_id: params.challenge.id})
+    |> (&changeset(%History.Attempt{}, &1)).()
+    |> History.Repo.insert!
   end
 
   def update(attempt, params = %{source: _source, status: _status}) do

@@ -1,11 +1,25 @@
 defmodule Arena.Match do
-  def start(conn, contest) do
+  def start(conn) do
+    with(submission_time <- DateTime.utc_now(),
+         {:ok, contest} <- History.Contest.at_timestamp(submission_time)) do
+      main(conn, contest, submission_time)
+    else
+      _ -> write_line(conn, "No contest running.")
+    end
+    :gen_tcp.close(conn)
+  end
+
+  def main(conn, contest, submission_time) do
     with({:ok, team} <- ask_team(conn),
          {:ok, challenge} <- ask_challenge(conn, contest)) do
-      attempt = History.Attempt.create(team: team, challenge: challenge, status: "running")
+      attempt = History.Attempt.create(%{time: submission_time,
+                                         team: team,
+                                         challenge: challenge,
+                                         status: "Running"})
       result = run_tests(conn, challenge)
       source = ask_source(conn, result)
-      History.Attempt.update(attempt, status: result, source: source)
+      History.Attempt.update(attempt, %{status: result, source: source})
+      write_line(conn, "#{result}.")
     else
       _ -> write_line(conn, "Invalid Submission.")
     end
@@ -32,7 +46,7 @@ defmodule Arena.Match do
   end
 
   def run_tests(_conn, _challenge) do
-    "wrong answer"
+    "Wrong answer"
   end
 
   def ask_source(conn, "accepted") do
