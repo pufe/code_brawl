@@ -10,13 +10,13 @@ defmodule Arena.Bouncer do
 
   def accept(socket) do
     {:ok, conn} = :gen_tcp.accept(socket)
-    submission_time = DateTime.utc_now()
-    contest = History.Contest.at_timestamp(submission_time)
-    if contest do
+    with(submission_time <- DateTime.utc_now(),
+         {:ok, contest} <- History.Contest.at_timestamp(submission_time)) do
       Arena.Queue.push(conn, contest)
     else
-      :gen_tcp.close(conn)
+      _ -> :gen_tcp.send(conn, "No contest running.")
     end
+    :gen_tcp.close(conn)
     accept(socket)
   end
 end

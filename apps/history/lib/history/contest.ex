@@ -19,16 +19,22 @@ defmodule History.Contest do
   end
 
   def at_timestamp(timestamp) do
-    Ecto.Query.from(c in History.Contest,
-                    where: (c.start <= ^timestamp and
-                            c.finish > ^timestamp),
-                    limit: 1)
-    |> History.Repo.one
+    case Ecto.Query.from(c in History.Contest,
+                         where: (c.start <= ^timestamp and
+                                 c.finish > ^timestamp),
+                         limit: 1)
+    |> History.Repo.one do
+      nil -> :error
+      contest -> {:ok, History.Repo.preload(contest, :challenges)}
+    end
   end
 
   def find_challenge(contest, challenge_name) do
-    History.Repo.preload(contest, :challenges).challenges
+    case History.Repo.preload(contest, :challenges).challenges
     |> Enum.filter(fn challenge -> challenge.name == challenge_name end)
-    |> List.first
+    |> List.first do
+      nil -> :error
+      challenge -> {:ok, challenge}
+    end
   end
 end

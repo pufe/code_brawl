@@ -9,7 +9,6 @@ defmodule Arena.Match do
     else
       _ -> write_line(conn, "Invalid Submission.")
     end
-    :gen_tcp.close(conn)
   end
 
   def ask_team(conn) do
