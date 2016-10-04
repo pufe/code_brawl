@@ -24,7 +24,6 @@ defmodule History.Contest do
                             c.finish > ^timestamp),
                     limit: 1)
     |> History.Repo.one
-    |> History.Repo.preload(:challenges)
   end
 
   def find_challenge(contest, challenge_name) do

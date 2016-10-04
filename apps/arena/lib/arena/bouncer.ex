@@ -5,6 +5,7 @@ defmodule Arena.Bouncer do
                                            reuseaddr: true,
                                            packet: :line])
     accept(socket)
+    listen(port)
   end
 
   def accept(socket) do

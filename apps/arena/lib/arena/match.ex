@@ -25,7 +25,7 @@ defmodule Arena.Match do
 
   def ask_challenge(conn, contest) do
     with(write_line(conn, "Challenge:"),
-         {:ok, challenge_name} <- read_line(conn, 1)) do
+         {:ok, challenge_name} <- read_line(conn, 200)) do
       History.Contest.find_challenge(contest, challenge_name)
     else
       _ -> {:error}
@@ -33,6 +33,7 @@ defmodule Arena.Match do
   end
 
   def run_tests(_conn, _challenge) do
+    "wrong answer"
   end
 
   def ask_source(conn, "accepted") do
@@ -43,7 +44,7 @@ defmodule Arena.Match do
   def ask_source(_conn, _result), do: nil
 
   defp read_line(conn, timeout) do
-    case :gen_tcp.recv(conn, 1023, timeout) do
+    case :gen_tcp.recv(conn, 0, timeout) do
       {:ok, message} -> {:ok, String.trim_trailing(message)}
       other -> other
     end
