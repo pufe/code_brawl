@@ -16,7 +16,7 @@ defmodule Arena.Match do
                                          team: team,
                                          challenge: challenge,
                                          status: "Running"})
-      result = run_tests(conn, challenge)
+      result = Arena.Test.run(conn, challenge, challenge.test_count)
       source = ask_source(conn, result)
       History.Attempt.update(attempt, %{status: result, source: source})
       write_line(conn, "#{result}.")
@@ -43,10 +43,6 @@ defmodule Arena.Match do
     else
       _ -> {:error}
     end
-  end
-
-  def run_tests(_conn, _challenge) do
-    "Wrong answer"
   end
 
   def ask_source(conn, "accepted") do
