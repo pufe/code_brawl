@@ -6,8 +6,8 @@ defmodule Arena.Test do
   def run(conn, challenge, test_number) do
     send_input(conn, challenge, test_number)
     answer = receive_output(conn, challenge.time_limit)
-    case compare_solution(answer, challenge) do
-      :ok -> run_tests(conn, challenge, test_number - 1)
+    case compare_solution(answer, challenge, test_number) do
+      :ok -> run(conn, challenge, test_number - 1)
       :wa -> "Wrong answer"
       :tl -> "Time limit exceeded"
       :dc -> "Disconnected mid run"
@@ -24,7 +24,7 @@ defmodule Arena.Test do
     case IO.gets(file, nil) do
       :eof -> :eof
       line -> :gen_tcp.send(conn, line)
-        send_file(conn, file)
+        write_file(conn, file)
     end
   end
 
@@ -46,10 +46,10 @@ defmodule Arena.Test do
     end
   end
 
-  def compare_solution(answer when is_atom(answer), _challenge), do: answer
+  def compare_solution(answer, _challenge, _test_number) when is_atom(answer), do: answer
 
-  def compare_solution(answer, challenge) do
-    solution = File.read(Path.join(["./problem", challenge.name, "solution#{test_number}"]), [:read])
+  def compare_solution(answer, challenge, test_number) do
+    solution = File.read(Path.join(["./problem", challenge.name, "solution#{test_number}"]))
     if answer == solution do
       :ok
     else
