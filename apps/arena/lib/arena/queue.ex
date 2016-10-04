@@ -2,7 +2,7 @@ defmodule Arena.Queue do
   use Supervisor
 
   def push(conn, contest) do
-    Supervisor.start_child(__MODULE__, [Arena.Match, [conn, contest]])
+    Supervisor.start_child(__MODULE__, [Arena.Match, :start, [conn, contest]])
   end
 
   def start_link do

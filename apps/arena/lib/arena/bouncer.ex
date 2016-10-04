@@ -3,7 +3,7 @@ defmodule Arena.Bouncer do
     {:ok, socket} = :gen_tcp.listen(port, [:binary,
                                            active: false,
                                            reuseaddr: true,
-                                           exit_on_close: true])
+                                           packet: :line])
     accept(socket)
   end
 
