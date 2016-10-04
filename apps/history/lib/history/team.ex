@@ -1,6 +1,7 @@
 defmodule History.Team do
   use Ecto.Schema
   import Ecto.Changeset
+  require Ecto.Query
 
   schema "teams" do
     field :name, :string
@@ -13,5 +14,13 @@ defmodule History.Team do
 
   def changeset(record, params \\ %{}) do
     cast(record, params, @required_fields ++ @optional_fields)
+  end
+
+  def authenticate(team_name, team_password) do
+    Ecto.Query.from(t in History.Team,
+                    where: (t.name == ^team_name and
+                            t.password == ^team_password),
+                    limit: 1)
+    |> History.Repo.one
   end
 end

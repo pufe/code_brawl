@@ -16,4 +16,14 @@ defmodule History.Attempt do
   def changeset(record, params \\ %{}) do
     cast(record, params, @required_fields ++ @optional_fields)
   end
+
+  def create(params = %{team: %History.Team{},
+                        challenge: %History.Challenge{},
+                        status: _status}) do
+    History.Repo.insert!(changeset(%History.Attempt{}, params))
+  end
+
+  def update(attempt, params = %{source: _source, status: _status}) do
+    History.Repo.update!(changeset(attempt, params))
+  end
 end

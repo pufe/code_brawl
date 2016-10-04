@@ -1,6 +1,7 @@
 defmodule History.Contest do
   use Ecto.Schema
   import Ecto.Changeset
+  require Ecto.Query
 
   schema "contests" do
     field :name, :string
@@ -15,5 +16,20 @@ defmodule History.Contest do
 
   def changeset(record, params \\ %{}) do
     cast(record, params, @required_fields ++ @optional_fields)
+  end
+
+  def at_timestamp(timestamp) do
+    Ecto.Query.from(c in History.Contest,
+                    where: (c.start <= ^timestamp and
+                            c.finish > ^timestamp),
+                    limit: 1)
+    |> History.Repo.one
+    |> History.Repo.preload(:challenges)
+  end
+
+  def find_challenge(contest, challenge_name) do
+    History.Repo.preload(contest, :challenges).challenges
+    |> Enum.filter(fn challenge -> challenge.name == challenge_name end)
+    |> List.first
   end
 end
