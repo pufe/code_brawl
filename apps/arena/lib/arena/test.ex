@@ -16,7 +16,8 @@ defmodule Arena.Test do
   end
 
   def send_input(conn, challenge, test_number) do
-    file = File.open(Path.join(["./problem", challenge.name, "input#{test_number}"]), [:read])
+    file_path = Path.join(["./problem", challenge.name, "input#{test_number}"])
+    file = File.open!(file_path, [:read])
     write_file(conn, file)
   end
 
@@ -49,7 +50,7 @@ defmodule Arena.Test do
   def compare_solution(answer, _challenge, _test_number) when is_atom(answer), do: answer
 
   def compare_solution(answer, challenge, test_number) do
-    solution = File.read(Path.join(["./problem", challenge.name, "solution#{test_number}"]))
+    solution = File.read!(Path.join(["./problem", challenge.name, "solution#{test_number}"]))
     if answer == solution do
       :ok
     else
