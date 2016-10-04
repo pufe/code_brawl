@@ -1,37 +1,34 @@
 defmodule Arena.Match do
   def start(conn, contest) do
-    with
-    {:ok, team} <- ask_team(conn),
-    {:ok, challenge} <- ask_challenge(conn) do
+    with({:ok, team} <- ask_team(conn),
+         {:ok, challenge} <- ask_challenge(conn, contest)) do
       attempt = History.Attempt.create(team: team, challenge: challenge, status: "running")
       result = run_tests(conn, challenge)
       source = ask_source(conn, result)
       History.Attempt.update(attempt, status: result, source: source)
     else
-      write_line(conn, "Invalid Submission.")
+      _ -> write_line(conn, "Invalid Submission.")
     end
     :gen_tcp.close(conn)
   end
 
   def ask_team(conn) do
-    with
-    write_line(conn, "Team:"),
-    {:ok, team_name} <- read_line(conn, 200),
-    write_line(conn, "Password:"),
-    {:ok, team_password} <- read_line(conn, 200) do
+    with(write_line(conn, "Team:"),
+         {:ok, team_name} <- read_line(conn, 200),
+         write_line(conn, "Password:"),
+         {:ok, team_password} <- read_line(conn, 200)) do
       History.Team.authenticate(team_name, team_password)
     else
-      {:error}
+      _ -> {:error}
     end
   end
 
   def ask_challenge(conn, contest) do
-    with
-    write_line(conn, "Challenge:"),
-    {:ok, challenge_name} <- read_line(conn, 1) do
+    with(write_line(conn, "Challenge:"),
+         {:ok, challenge_name} <- read_line(conn, 1)) do
       History.Contest.find_challenge(contest, challenge_name)
     else
-      {:error}
+      _ -> {:error}
     end
   end
 
@@ -43,7 +40,7 @@ defmodule Arena.Match do
     IO.iodata_to_binary(Enum.reverse(read_source(conn, [], 1024)))
   end
 
-  def ask_source(conn, _result) do: nil
+  def ask_source(_conn, _result), do: nil
 
   defp read_line(conn, timeout) do
     case :gen_tcp.recv(conn, 1023, timeout) do
@@ -52,7 +49,7 @@ defmodule Arena.Match do
     end
   end
 
-  defp read_source(conn, partial_source, 0) do
+  defp read_source(_conn, partial_source, 0) do
     partial_source
   end
 
