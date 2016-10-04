@@ -17,10 +17,13 @@ defmodule History.Team do
   end
 
   def authenticate(team_name, team_password) do
-    Ecto.Query.from(t in History.Team,
-                    where: (t.name == ^team_name and
-                            t.password == ^team_password),
-                    limit: 1)
-    |> History.Repo.one
+    case (Ecto.Query.from(t in History.Team,
+                           where: (t.name == ^team_name and
+                                   t.password == ^team_password),
+                           limit: 1)
+          |> History.Repo.one) do
+      nil -> :not_found
+      team -> {:ok, team}
+    end
   end
 end
