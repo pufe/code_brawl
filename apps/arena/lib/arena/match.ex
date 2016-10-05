@@ -45,7 +45,7 @@ defmodule Arena.Match do
     end
   end
 
-  def ask_source(conn, "accepted") do
+  def ask_source(conn, "Accepted") do
     write_line(conn, "Source:")
     IO.iodata_to_binary(Enum.reverse(read_source(conn, [], 1024)))
   end

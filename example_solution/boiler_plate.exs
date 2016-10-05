@@ -26,7 +26,7 @@ defmodule BoilerPlate do
       "Password:" -> write_line(conn, solver.password)
       "Challenge:" -> write_line(conn, solver.challenge)
       "Test:" -> solver.solve(conn)
-      "Source:" -> write_source(conn)
+      "Source:" -> write_source(conn, solver.filename)
       result -> IO.puts(result)
     end
   end
@@ -35,8 +35,8 @@ defmodule BoilerPlate do
     :gen_tcp.send(conn, "#{line}\n")
   end
 
-  def write_source(conn) do
-    :gen_tcp.send(conn, File.read!(solver.filename))
+  def write_source(conn, filename) do
+    :gen_tcp.send(conn, File.read!(filename))
   end
 
   def read_line(conn) do
