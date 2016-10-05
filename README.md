@@ -3,6 +3,13 @@
 **Yet another programming contest platform.**
 
 This time, in Elixir!
+Requires Elixir 1.3 and postgresql. Run it with:
+
+```sh
+mix deps.get
+mix deps.compile
+mix run --no-halt
+```
 
 Contains three apps.
 
