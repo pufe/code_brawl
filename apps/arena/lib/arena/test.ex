@@ -46,7 +46,7 @@ defmodule Arena.Test do
       {:ok, "EOF\n"} -> IO.iodata_to_binary(Enum.reverse(partial_output))
       {:ok, line} -> read_output(conn, [line | partial_output])
       {:error, reason} ->
-        IO.insepct(reason)
+        IO.inspect(reason)
         :dc
       _ -> :unknown
     end
