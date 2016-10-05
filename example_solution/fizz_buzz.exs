@@ -2,12 +2,12 @@
 Code.require_file("boiler_plate.exs")
 
 defmodule FizzBuzz do
-  def host, do: 'localhost'
+  def host, do: {192, 168, 16, 109}
   def port, do: 8080
   def filename, do: __ENV__.file
-  def team, do: "Pufe"
-  def password, do: "123"
-  def challenge, do: "Fizz Buzz"
+  def team, do: "teste"
+  def password, do: "perdi"
+  def challenge, do: "FizzBuzz"
 
   def solve(conn) do
     input = BoilerPlate.read_line(conn)
