@@ -18,7 +18,7 @@ defmodule Scoreboard.Calculator do
     else
       team
     end
-    team = Map.merge(team, %{challenges: [[solved, attempts, time] | team.challenges]})
+    team = Map.merge(team, %{challenges: [[solved, attempts, time, challenge.color] | team.challenges]})
     process_team(team, rest, contest)
   end
 
