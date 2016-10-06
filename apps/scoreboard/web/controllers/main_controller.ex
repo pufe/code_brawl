@@ -19,7 +19,7 @@ defmodule MainController do
   end
 
   defp render_contest(conn, contest) do
-    render conn, "contest.html", socreboard: Scoreboard.Calculator.process(contest)
+    render conn, "contest.html", scoreboard: Scoreboard.Calculator.process(contest)
   end
 
   defp with_contest(conn, action) do
