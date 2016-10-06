@@ -7,14 +7,14 @@ defmodule Scoreboard.Calculator do
     %{contest: contest, challenges: challenges, teams: teams}
   end
 
-  def process_team(team, [], contest) do
-    %{team: team, score: score, penalty: penalty, challenges: Enum.reverse(challenges)}
+  def process_team(team, [], _contest) do
+    Map.merge(team, %{challenges: Enum.reverse(team.challenges)})
   end
 
   def process_team(team, [challenge|rest], contest) do
-    [solved, attempts, time] = score_challenge(team, challenge, contest)
+    [solved, attempts, time] = score_challenge(team.team, challenge, contest)
     team = if solved do
-      Map.merge(team, %{score: team.score + 1, penalty: team.penalty + time + attempts*20})
+      Map.merge(team, %{score: team.score + 1, penalty: team.penalty + time + attempts*5})
     else
       team
     end
@@ -24,10 +24,10 @@ defmodule Scoreboard.Calculator do
 
   def score_challenge(team, challenge, contest) do
     case History.Team.first_accepted(team, challenge) do
-      {:ok, attempt} ->
+      {:ok, accepted} ->
         solved = true
-        attempts = History.Team.count_attempts_before(team, challenge, attempt)
-        time = attempt.time - contest.start
+        attempts = History.Team.count_attempts_before(team, challenge, accepted.time)
+        time = compute_minutes(accepted.time, contest.start)
         [solved, attempts, time]
       _ ->
         solved = false
@@ -39,5 +39,15 @@ defmodule Scoreboard.Calculator do
 
   def new_team_data(team) do
     %{team: team, score: 0, penalty: 0, challenges: []}
+  end
+
+  def to_seconds(datetime) do
+    datetime
+    |> Ecto.DateTime.to_erl
+    |> :calendar.datetime_to_gregorian_seconds
+  end
+
+  def compute_minutes(datetime1, datetime2) do
+    div(to_seconds(datetime1) - to_seconds(datetime2), 60)
   end
 end

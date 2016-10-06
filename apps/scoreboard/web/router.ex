@@ -16,8 +16,9 @@ defmodule Scoreboard.Router do
   scope "/", Scoreboard do
     pipe_through :browser # Use the default browser stack
 
-    get "/", MainController, :index
-    get "/:challenge", MainController, :show
+    get "/", MainController, :current_contest
+    get "/:challenge", MainController, :show_challenge
+    get "/old/:id", MainController, :show_contest
   end
 
   # Other scopes may use custom stacks.

@@ -15,26 +15,36 @@ defmodule History.Contest do
 
   def changeset(record, params \\ %{}) do
     cast(record, params, @required_fields ++ @optional_fields)
-    |> cast_assoc(:challenges)
   end
 
   def at_timestamp(timestamp) do
-    case Ecto.Query.from(c in History.Contest,
+    case(Ecto.Query.from(c in History.Contest,
                          where: (c.start <= ^timestamp and
                                  c.finish > ^timestamp),
                          limit: 1)
-    |> History.Repo.one do
+         |> History.Repo.one) do
       nil -> :error
       contest -> {:ok, History.Repo.preload(contest, :challenges)}
     end
   end
 
   def find_challenge(contest, challenge_name) do
-    case History.Repo.preload(contest, :challenges).challenges
-    |> Enum.filter(fn challenge -> challenge.name == challenge_name end)
-    |> List.first do
+    case(History.Repo.preload(contest, :challenges).challenges
+         |> Enum.filter(&(&1.name == challenge_name))
+         |> List.first) do
       nil -> :error
       challenge -> {:ok, challenge}
+    end
+  end
+
+  def next_contest(timestamp) do
+    case(Ecto.Query.from(c in History.Contest,
+                         where: c.start > ^timestamp,
+                         order_by: [asc: c.start],
+                         limit: 1)
+         |> History.Repo.one) do
+      nil -> nil
+      contest -> {:ok, contest}
     end
   end
 end

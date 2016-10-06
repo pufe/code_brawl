@@ -1,13 +1,13 @@
-defmodule MainController do
+defmodule Scoreboard.MainController do
   use Scoreboard.Web, :controller
 
-  def index(conn, _params) do
+  def current_contest(conn, _params) do
     with_contest(conn, fn conn, contest ->
       render_contest(conn, contest)
     end)
   end
 
-  def show(conn, %{challenge: name}) do
+  def show_challenge(conn, %{challenge: name}) do
     with_contest(conn, fn conn, contest ->
       case History.Contest.find_challenge(contest, name) do
         {:ok, challenge} ->
@@ -16,6 +16,13 @@ defmodule MainController do
           render_contest(conn, contest)
       end
     end)
+  end
+
+  def show_contest(conn, %{id: id}) do
+    case History.Repo.get(History.Contest, id) do
+      nil -> current_contest(conn, nil)
+      contest -> render_contest(conn, contest)
+    end
   end
 
   defp render_contest(conn, contest) do
@@ -36,7 +43,7 @@ defmodule MainController do
     case History.Contest.next_contest(timestamp) do
       {:ok, contest} ->
         render conn, "wait.html", contest: contest
-      true ->
+      _ ->
         render conn, "no_contest.html"
     end
   end
