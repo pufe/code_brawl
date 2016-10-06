@@ -1,0 +1,33 @@
+<h1>Aguardando início da competição "<%= @contest.name %>"</h1>
+<p>
+  Início em <span id="time"></span>.
+</p>
+<script>
+ var t1 = new Date("<%= DateTime.to_iso8601(DateTime.utc_now()) %>");
+ var t2 = new Date("<%= Ecto.DateTime.to_iso8601(@contest.start) %>");
+ function format(number) {
+   number = Math.floor(number);
+   if (number < 10) {
+     return "0"+number;
+   }
+   else {
+     return ""+number;
+   }
+ }
+ function difference(t1, t2) {
+   full_diff = Math.floor((t2.getTime() - t1.getTime())/1000);
+   return [format(full_diff/60/60),
+           format((full_diff/60)%60),
+           format(full_diff%60)].join(":");
+ }
+ function update() {
+   t1 = new Date(t1.getTime() + 1000);
+   if (t1 <= t2) {
+     document.getElementById("time").innerHTML = difference(t1, t2);
+   }
+   else {
+     location.reload();
+   }
+ }
+ setInterval(update, 1000);
+</script>
