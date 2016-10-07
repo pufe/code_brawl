@@ -1,5 +1,32 @@
 td {
   vertical-align: bottom;
   padding: 5px;
-  border: 1 px solid black;
+  border: 1px solid black;
+}
+td.code {
+  vertical-align: top;
+  min-width: 300px;
+}
+th.small {
+  min-width: 30px;
+}
+th.large {
+  min-width: 80px;
+}
+table {
+  border-collapse: collapse;
+}
+.nowrap {
+  white-space: nowrap;
+  text-align: right;
+}
+body {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+p {
+  max-width: 1000px;
+}
+pre {
+  margin: 0;
 }

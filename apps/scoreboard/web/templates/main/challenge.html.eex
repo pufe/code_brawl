@@ -1,0 +1,5 @@
+<%= big_balloon(@challenge.color) %>
+<%= challenge_description(@challenge.name) %>
+<p>
+  <a href="/">Voltar ao placar.</a>
+</p>

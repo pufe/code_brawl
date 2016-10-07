@@ -1,26 +1,36 @@
 <h1>Competição: <%= @scoreboard.contest.name %></h1>
 <table>
   <tr>
-    <th>#</th>
-    <th>Time</th>
+    <th class="small">#</th>
+    <th class="large">Time</th>
     <%= for challenge <- @scoreboard.challenges do %>
-      <th><%= challenge.name %></th>
+      <th class="large">
+        <a href="/<%= challenge.name %>">
+          <%= challenge.name %>
+        </a>
+      </th>
     <% end %>
-    <th>Total</th>
+    <th class="large">Total</th>
   </tr>
   <%= for {data, pos} <- Enum.with_index(@scoreboard.teams) do %>
     <tr>
       <td><%= pos+1 %></td>
       <td><%= data.team.name %></td>
       <%= for challenge <- data.challenges do %>
-        <td><%= balloon(challenge) %></td>
+        <td class="nowrap">
+          <%= balloon(challenge) %>
+        </td>
       <% end %>
-      <td><%= data.score %> <small>(<%= data.penalty %>)</td>
+      <td class="nowrap">
+        <%= data.score %> <small>(<%= data.penalty %>)</small>
+      </td>
     </tr>
   <% end %>
 </table>
 <script>
+ <%= if @reload do %>
  setInterval(function() {
    location.reload();
  }, 15000);
+ <% end %>
 </script>

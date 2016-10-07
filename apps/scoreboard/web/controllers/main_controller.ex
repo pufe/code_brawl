@@ -3,30 +3,30 @@ defmodule Scoreboard.MainController do
 
   def current_contest(conn, _params) do
     with_contest(conn, fn conn, contest ->
-      render_contest(conn, contest)
+      render_contest(conn, contest, true)
     end)
   end
 
-  def show_challenge(conn, %{challenge: name}) do
+  def show_challenge(conn, %{"challenge" => name}) do
     with_contest(conn, fn conn, contest ->
       case History.Contest.find_challenge(contest, name) do
         {:ok, challenge} ->
           render conn, "challenge.html", challenge: challenge
         true ->
-          render_contest(conn, contest)
+          render_contest(conn, contest, true)
       end
     end)
   end
 
-  def show_contest(conn, %{id: id}) do
+  def show_contest(conn, %{"id" => id}) do
     case History.Repo.get(History.Contest, id) do
       nil -> current_contest(conn, nil)
-      contest -> render_contest(conn, contest)
+      contest -> render_contest(conn, contest, false)
     end
   end
 
-  defp render_contest(conn, contest) do
-    render conn, "contest.html", scoreboard: Scoreboard.Calculator.process(contest)
+  defp render_contest(conn, contest, reload) do
+    render conn, "contest.html", scoreboard: Scoreboard.Calculator.process(contest), reload: reload
   end
 
   defp with_contest(conn, action) do

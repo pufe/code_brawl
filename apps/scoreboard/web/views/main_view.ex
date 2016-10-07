@@ -17,9 +17,9 @@ defmodule Scoreboard.MainView do
     IO.inspect(fodase)
   end
 
-  def balloon_svg(color) do
+  def balloon_svg(color, {width, height, float} \\ {25, 30, false}) do
   """
-<svg width="25" height="30" viewbox="0 0 100 120">
+<svg width="#{width}" height="#{height}" viewbox="0 0 100 120" #{if float, do: ~s(style="float: left;")}>
 <path d="M 45 92 l -5 10 q 5 -8 10 0 q 5 -8 10 0
 l -5 -10 q 30 -30 30 -50 q 0 -40 -35 -40 q -35 0 -35 40 q 0 20 30 50"
 stroke-width="3" stroke="black" fill="#{color}" />
@@ -27,5 +27,16 @@ stroke-width="3" stroke="black" fill="#{color}" />
 stroke-width="3" fill="none"/>
 </svg>
 """
+  end
+
+  def big_balloon(color) do
+    {:safe, balloon_svg(color, {40, 48, true})}
+  end
+
+  def challenge_description(name) do
+    case File.read(Path.join(["problem", name, "description.html"])) do
+      {:ok, description} -> {:safe, description}
+      _ -> {:safe, "<h1>Enunciado não econtrado ¯\\_(ツ)_/¯</h1>"}
+    end
   end
 end
