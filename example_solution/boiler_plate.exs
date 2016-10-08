@@ -25,10 +25,31 @@ defmodule BoilerPlate do
       "Team:" -> write_line(conn, solver.team)
       "Password:" -> write_line(conn, solver.password)
       "Challenge:" -> write_line(conn, solver.challenge)
-      "Test:" -> solver.solve(conn)
+      "Test:" ->
+        read_input(conn, [])
+        |> solver.solve()
+        |> (&:gen_tcp.send(conn, &1)).()
+        write_line(conn, "EOF")
       "Source:" -> write_source(conn, solver.filename)
       result -> IO.puts(result)
     end
+  end
+
+  def read_input(conn, partial_input) do
+    case :gen_tcp.recv(conn, 0) do
+      {:ok, "EOF\n"} ->
+        compile(partial_input)
+      {:ok, line} ->
+        read_input(conn, [line | partial_input])
+      _ ->
+        compile(partial_input)
+    end
+  end
+
+  def compile(list_of_strings) do
+    list_of_strings
+    |> Enum.reverse
+    |> IO.iodata_to_binary
   end
 
   def write_line(conn, line) do
@@ -37,12 +58,5 @@ defmodule BoilerPlate do
 
   def write_source(conn, filename) do
     :gen_tcp.send(conn, File.read!(filename))
-  end
-
-  def read_line(conn) do
-    case :gen_tcp.recv(conn, 0) do
-      {:ok, line} -> String.trim_trailing(line)
-      _ -> :error
-    end
   end
 end
