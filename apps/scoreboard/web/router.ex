@@ -17,6 +17,7 @@ defmodule Scoreboard.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", MainController, :current_contest
+    get "/balloon", MainController, :balloon_feed
     get "/:challenge", MainController, :show_challenge
     get "/old/:id", MainController, :show_contest
   end

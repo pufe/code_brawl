@@ -1,0 +1,36 @@
+<table>
+  <tr>
+    <th>
+      balão
+    </th>
+    <th>
+      time
+    </th>
+    <th>
+      desafio
+    </th>
+    <th>
+      tempo
+    </th>
+  </tr>
+  <%= for ac <- @ac_list do %>
+    <tr>
+      <td>
+        <%= {:safe, balloon_svg(ac.challenge.color)} %>
+      <td>
+        <%= ac.team.name %>
+      </td>
+      <td>
+        <%= ac.challenge.name %>
+      </td>
+      <td>
+        <%= Ecto.DateTime.to_string(ac.time) %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+<script>
+ setInterval(function() {
+   location.reload();
+ }, 15000);
+</script>

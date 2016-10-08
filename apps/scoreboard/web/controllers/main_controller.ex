@@ -7,6 +7,12 @@ defmodule Scoreboard.MainController do
     end)
   end
 
+  def balloon_feed(conn, _params) do
+    with_contest(conn, fn conn, contest ->
+      render conn, "balloon_feed.html", ac_list: Scoreboard.BalloonFeed.fetch(contest)
+    end)
+  end
+
   def show_challenge(conn, %{"challenge" => name}) do
     with_contest(conn, fn conn, contest ->
       case History.Contest.find_challenge(contest, name) do
