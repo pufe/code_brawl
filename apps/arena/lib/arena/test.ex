@@ -30,8 +30,8 @@ defmodule Arena.Test do
     end
   end
 
-  def receive_output(conn, time_limit) do
-    case :gen_tcp.recv(conn, 0, time_limit) do
+  def receive_output(conn, _time_limit) do
+    case :gen_tcp.recv(conn, 0, 10000) do
       {:ok, first_line} -> read_output(conn, [first_line])
       {:error, :timeout} -> :tl
       {:error, reason} ->
@@ -42,7 +42,7 @@ defmodule Arena.Test do
   end
 
   def read_output(conn, partial_output) do
-    case :gen_tcp.recv(conn, 0, 75) do
+    case :gen_tcp.recv(conn, 0, 2000) do
       {:ok, "EOF\n"} -> IO.iodata_to_binary(Enum.reverse(partial_output))
       {:ok, line} -> read_output(conn, [line | partial_output])
       {:error, reason} ->
