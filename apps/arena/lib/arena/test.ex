@@ -42,7 +42,7 @@ defmodule Arena.Test do
   end
 
   def read_output(conn, partial_output) do
-    case :gen_tcp.recv(conn, 0, 50) do
+    case :gen_tcp.recv(conn, 0, 75) do
       {:ok, "EOF\n"} -> IO.iodata_to_binary(Enum.reverse(partial_output))
       {:ok, line} -> read_output(conn, [line | partial_output])
       {:error, reason} ->
