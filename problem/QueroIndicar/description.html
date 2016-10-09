@@ -1,0 +1,66 @@
+<h1>QueroIndicar</h1>
+<p>
+  Lucas teve uma ideia sensacional para aumentar o marketing do QueroBolsa, premiar os alunos que mais
+  indicarem o site para seus amigos. Para isso ele bolou um sistema em que um aluno ganha um ponto se
+  fizer login no site, e ganha cinco pontos se adquirir um cupom. Além disso, quando ele se cadastra
+  ele diz quem foi que o indicou ao site, e quem indicou também ganha pontos.
+</p>
+<p>
+  Entretanto, Lucas achou que seria mais justo se a pessoa só ganhasse pontos das pessoas que ela indicou
+  diretamente ao site. Ou seja se pessoa A indicou pessoa B, e pessoa B indicou pessoa C, a pessoa A
+  não ganha pontos pela pessoa C.
+</p>
+<p>
+  Agora Lucas tem uma lista de todos os alunos que se matricularam enquanto sua campanha de marketing
+  estava ativa e precisa da sua ajuda para determinar quem está ganhando nos pontos de indicação.
+</p>
+<h2>Tarefa</h2>
+<p>
+  Sua tarefa é escrever um programa recebe a lista de alunos - contendo os nome do aluno, quem o indicou,
+  se ele fez login no site e se ele adquiriu um cupom no site - e gerar um placar com a pontuação de
+  cada aluno ordenado de quem tem mais pontos para quem tem menos pontos. Em caso de empate, ordenar
+  alfabeticamente pelo nome do aluno.
+</p>
+<h2>Entrada</h2>
+<p>
+  Em cada caso de teste, a primeira linha da entrada contém um único inteiro <code>N</code> indicando
+  quantos alunos serão descritos. Seguem então <code>N</code> linhas contendo o nome do aluno (que
+  será uma string alfanumérica de até 30 caracteres), o nome da pessoa que o indicou (ou
+  <code>google</code> caso ele não tenha sido indicado), e dois valores booleanos (<code>true</code>
+  ou <code>false</code>) indicando respectivamente se ele tem login e se ele tem cupom.
+</p>
+<p>
+  Não haverá dois alunos com mesmo nome, um aluno com nome <code>google</code>, <code>true</code>
+  ou <code>false</code>. Nenhum aluno é indicado por ele mesmo. Haverá no máximo 10<sup>4</sup> alunos.
+</p>
+<h2>Saída</h2>
+<p>
+  Para cada teste, seu programa deve imprimir <code>N</code> linhas, uma para cada aluno. Ordenados
+  de quem fez mais pontos para quem fez menos pontos. Cada linha
+  deve ter a posição em que o aluno ficou, o nome do aluno, e quantos pontos ele fez. Seguindo o
+  formato do exemplo.
+</p>
+<h2>Exemplos</h2>
+<table>
+  <tr>
+    <th>Entrada</th>
+    <th>Saída</th>
+  </tr>
+  <tr>
+    <td>
+      <pre><code>5
+alice google true true
+bob google false false
+charlie bob false true
+denise bob false true
+eve denise true false</code></pre>
+    </td>
+    <td>
+      <pre><code>1 bob 10
+2 alice  6
+3 denise 6
+4 charlie 5
+5 eve 1</code></pre>
+    </td>
+  </tr>
+</table>

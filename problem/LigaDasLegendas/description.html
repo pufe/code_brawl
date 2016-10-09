@@ -1,0 +1,74 @@
+<h1>LigaDasLegendas</h1>
+<p>
+  João gosta muito de assistir os jogos da <em>LigaDasLegendas</em> em que os times competem para ver
+  quem consegue traduzir um filme mais rápido, e com melhor precisão. Os times são julgados pela
+  ortografia, pela correção das frases, pela sincronia do vídeo com o momento em que as legendas aparecem,
+  dentre outros critérios altamente técnicos.
+</p>
+<p>
+  Na <em>LigaDasLegendas</em> os times competem um contra um, usando o mesmo filme para ser mais justo, e
+  um comitê imparcial decide a pontuação de cada time em cada um dos critérios, e há um único vencedor para
+  cada competição.
+</p>
+<p>
+  João é um torcedor fanático pelo time <em>InTZ</em>, mas acha que eles estão ficando preguiçosos, e como
+  maneira de provar isso, ele quer comparar o desempenho atual deles com o desempenho da melhor época deles.
+  Para isso ele pediu sua ajuda para analisar o histórico de todas as partidas do time e determinar qual o
+  ponto onde o número de vitórias menos o número de derrotas desde o começo do campeonato até esse ponto é
+  o maior possível.
+</p>
+<h2>Tarefa</h2>
+<p>
+  Sua tarefa é escrever um programa para ler o histórico de jogos que o João guardou e determine o número do jogo
+  no qual ao final dele, o saldo de vitórias é o maior possível. Caso haja empate, escolha o mais recente, ou
+  seja, o que contém mais jogos.
+</p>
+<h2>Entrada</h2>
+<p>
+  Para cada teste, a entrada começa com uma linha com um inteiro <code>N</code>
+  (sendo <code>1 &lt;= N &lt;= 10<sup>5</sup></code>). Seguem então N linhas cada uma com a string
+  <code>ganhou</code> ou <code>perdeu</code> indicando se o time <em>InTZ</em> ganhou ou perdeu.
+  Os jogos são informados na ordem em que eles aconteceram. Considere que antes do jogo 1 o número de
+  vitórias e derrotas é zero.
+</p>
+<h2>Saída</h2>
+<p>
+  Para cada teste, seu programa deve imprimir uma única linha com 3 inteiros: o número do jogo que o João
+  quer saber, a quantidade de vitórias antes desse jogo, e a quantidade de derrotas
+  antes desse jogo (contando com o próprio jogo em questão).
+</p>
+<h2>Exemplos</h2>
+<table>
+  <tr>
+    <th>Entrada</th>
+    <th>Saída</th>
+  </tr>
+  <tr>
+    <td class="code">
+      <pre><code>5
+ganhou
+perdeu
+ganhou
+ganhou
+perdeu</code></pre>
+    </td>
+    <td  class="code">
+      <pre><code>4 3 1</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td class="code">
+      <pre><code>7
+ganhou
+perdeu
+ganhou
+perdeu
+ganhou
+perdeu
+ganhou</code></pre>
+    </td>
+    <td class="code">
+      <pre><code>7 4 3</code></pre>
+    </td>
+  </tr>
+</table>

@@ -1,0 +1,52 @@
+<h1>Parcerias</h1>
+<p>
+  O time do Sérgio precisa visitar várias faculdades para fechar novas parcerias viajando por várias
+  cidades. Sérgio quer garantir que vai gastar o mínimo de dinheiro com passagens aéreas para sobrar
+  mais dinheiro do seu budget para fazer happy hour com seu time. Então ele pesquisou bastante para
+  encontrar promoções de passagem aérea, e precisa determinar qual a ordem em que sai mais barato
+  visitar todas as cidades e voltar para São José dos Campos.
+</p>
+<h2>Tarefa</h2>
+<p>
+  Sua tarefa é escrever um programa que leia todos os preços de passagem aérea que o Sérgio obteve
+  e determine qual a rota mais barata.
+</p>
+<h2>Entrada</h2>
+<p>
+  Para cada caso de teste, a primeira linha da entrada contém um número inteiro <code>N</code>
+  (sendo <code>N &lt;= 10</code>) indicando o número de cidades que uma pessoa do time precisa
+  visitar, incluindo São José dos Campos. Seguem <code>N</code> linhas, cada uma com <code>N</code>
+  inteiros onde na <code>i</code>-ésima linha, o <code>j</code>-ésimo elemento representa o preço
+  da passagem aérea da cidade <code>i</code> para a cidade <code>j</code>. São José dos Campos é
+  sempre a cidade de número 1, e o preço das passagens é sempre positivo e menor ou igual <code>10<sup>4</sup></code>.
+</p>
+<h2>Saída</h2>
+<p>
+  Para cada caso de teste, seu programa deve produzir uma única linha, com <code>N+1</code> inteiros
+  representando a ordem que sai mais barato percorrer todas as cidades e voltar para São José dos
+  Campos. Caso haja mais de uma rota com o mesmo preço, escolha a que contém o menor número na primeira
+  posição, caso continue empatado, escolha a que contém o menor número na segunda posição e assim
+  sucessivamente. (Ordem lexicográfica).
+</p>
+<p>
+  Considere as cidades numeradas de <code>1</code> a <code>N</code> inclusive, e sua rota deve sempre
+  começar e terminar com a cidade de número 1.
+</p>
+<h2>Exemplos</h2>
+<table>
+  <tr>
+    <th>Entrada</th>
+    <th>Saída</th>
+  </tr>
+  <tr>
+    <td class="code">
+      <pre><code>3
+0 3 10
+1 0 8
+3 10 0</code></pre>
+    </td>
+    <td  class="code">
+      <pre><code>1 2 3 1</code></pre>
+    </td>
+  </tr>
+</table>

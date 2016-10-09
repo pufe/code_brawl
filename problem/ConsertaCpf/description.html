@@ -1,0 +1,51 @@
+<h1>ConsertaCpf</h1>
+<p>
+  Guilherme precisa conferir se as faculdades validaram ou não os alunos matriculados pelo QueroBolsa,
+  entretanto o arquivo que as faculdades passaram com os cpfs dos alunos não seguem a formatação padrão
+  de cpf (999.999.999-99). Como foram várias faculdades diferentes, não há nenhum padrão no formato do
+  cpf!
+</p>
+<p>
+  Além disso, em alguns casos o arquivo das faculdades fingiu que o cpf era um número e apagou os zeros
+  à esquerda, ou ainda adicionou texto a mais no final do número (que pode conter mais dígitos).
+  Guilherme então pediu sua ajuda para padronizar todos os cpfs que ele recebeu das faculdades para conferir
+  que já terminou todo o seu trabalho e pode sair despreocupado para a festa.
+</p>
+<h2>Tarefa</h2>
+<p>
+  Sua tarefa é escrever um programa que formate corretamente todos os cpfs recebidos na entrada,
+  descartando qualquer coisa que não seja número, removendo dígitos extras à direita, ou adicionando
+  zeros à esquerda. E depois imprimir seguindo o formato padrão <code>000.000.000-00</code> de cpf.
+</p>
+<h2>Entrada</h2>
+<p>
+  Para cada teste, a entrada consiste de uma única linha contendo um cpf com ou sem formatação
+  fornecido pelo banco. Essa string contém apenas caracteres ASCII imprimíveis.
+</p>
+<h2>Saída</h2>
+<p>
+  Para cada teste, seu programa deve imprimir uma única linha contendo o cpf corrigido e formatado.
+</p>
+<h2>Exemplos</h2>
+<table>
+  <tr>
+    <th>Entrada</th>
+    <th>Saída</th>
+  </tr>
+  <tr>
+    <td>
+      <pre><code>12345</code></pre>
+    </td>
+    <td>
+      <pre><code>000.000.123-45</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <pre><code>comeco 333 meio 222 fim 111 verificacao 99.</code></pre>
+    </td>
+    <td>
+      <pre><code>333.222.111-99</code></pre>
+    </td>
+  </tr>
+</table>

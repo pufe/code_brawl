@@ -1,0 +1,82 @@
+<h1>Sprint</h1>
+<p>
+  O time de desenvolvimento agrupa as tarefas que tem que fazer em <em>sprints</em>, e o Roger como chefe
+  de uma das equipes, quer saber quem vai fazer mais tarefas. Ficou combinado que as tarefas estão ordenadas
+  por prioridade, e cada desenvolvedor vai sempre pegar a tarefa de prioridade mais alta. Se mais de um
+  desenvolvedor estiver livre ao mesmo tempo, o desenvolvedor mais rápido (o Roger já conhece seu time
+  e sabe quem é mais rápido) vai marcar a tarefa para si.
+</p>
+<p>
+  Considere que inicialmente todos os desenvolvedores estão livres, que cada desenvolvedor vai levar exatamente
+  o tempo previsto para concluir a tarefa, e que o tempo para marcar a próxima tarefa e trocar de tarefa é
+  desprezível.
+</p>
+<h2>Tarefa</h2>
+<p>
+  Sua tarefa é escrever um programa que receba a lista de tarefas de um <em>sprint</em> e determine qual tarefa
+  será realizada por cada desenvolvedor.
+</p>
+<h2>Entrada</h2>
+<p>
+  Para cada teste, a entrada começa com uma linha com dois inteiros
+  <code>N</code> e <code>M</code> (sendo <code>1 &lt;= N &lt;= 100</code> e
+  <code> 1 &lt;= M &lt;= 10<sup>4</sup></code>)
+  separados por um único caractere de espaço. Eles representam respectivamente o número de desenvolvedores
+  no time do Roger, e quantas tarefas entraram nesse sprint. Seguem então N linhas com os nomes dos
+  desenvolvedores, cada nome é uma sequencia alfanumérica de no máximo 30 caracteres. Depois vêm M linhas
+  indicando o tempo que demora para concluir a tarefa.
+</p>
+<p>
+  A ordem que os desenvolvedores aparecem na entrada é do mais rápido para o mais lento, e a ordem que
+  as tarefas aparecem na entrada é da mais prioritária para a menos prioritária.
+</p>
+<h2>Saída</h2>
+<p>
+  Para cada teste, seu programa deve imprimir <code>N</code> linhas, uma para cada desenvolvedor do time.
+  Cada linha deve conter o nome do desenvolvedor e quantas tarefas ele fez. Os desenvolvedores devem ser
+  informados na mesma ordem que na entrada. (do mais rápido para o mais lento.)
+</p>
+<h2>Exemplos</h2>
+<table>
+  <tr>
+    <th>Entrada</th>
+    <th>Saída</th>
+  </tr>
+  <tr>
+    <td class="code">
+      <pre><code>3 5
+alice
+bob
+charlie
+1
+10
+10
+1
+1</code></pre>
+    </td>
+    <td  class="code">
+      <pre><code>alice 3
+bob 1
+charlie 1</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td class="code">
+      <pre><code>3 6
+denise
+eve
+fernando
+2
+5
+4
+4
+3
+3</code></pre>
+    </td>
+    <td class="code">
+      <pre><code>denise 2
+eve 2
+fernando 2</code></pre>
+    </td>
+  </tr>
+</table>

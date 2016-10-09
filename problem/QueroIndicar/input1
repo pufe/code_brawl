@@ -1,0 +1,7 @@
+5
+alice google true true
+bob google false false
+charlie bob false true
+denise bob false true
+eve denise true false
+EOF

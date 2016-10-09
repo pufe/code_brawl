@@ -1,0 +1,64 @@
+<h1>Campeonato</h1>
+<p>
+  Pufe gosta muito de jogos de tabuleiro, e frequentemente joga com os colegas de trabalho depois do
+  expediente. Recentemente ele descobriu o jogo sensacional chamado Hexadrez que tem tudo que ele mais
+  gosta em jogos de tabuleiro: estratégia, criatividade, assimetria, interpretação de texto e hexágonos.
+</p>
+<p>
+  Pufe quer organizar um campeonato de Hexadrez com todos os seus colegas de trabalho, fazendo todas as
+  combinações possíveis de jogos. Como cada partida de Hexadrez requer exatamente 3 pessoas, e uma das
+  pessoas na partida joga como Grão-vizir enquanto os outros dois jogam como Duques, o número de partidas
+  ficou difícil de calcular.
+</p>
+<h2>Tarefa</h2>
+<p>
+  Sua tarefa é escrever um programa que diga qual o número mínimo de semanas que o campeonato vai durar
+  sabendo quantas pessoas vão participar do campeonato, e qual o número máximo de partidas por
+  semana que serão jogadas.
+</p>
+<h2>Entrada</h2>
+<p>
+  Para cada teste, a entrada consiste de uma única linha com dois inteiros
+  <code>N</code> e <code>P</code> (sendo <code>3 &lt;= N &lt;= 100</code> e
+  <code>1 &lt;= P &lt;= 10<sup>4</sup></code>)
+  separados por um único caractere de espaço. Indicando respectivamente quantas pessoas vão participar
+  do campeonato e quantas partidas por semana vão acontecer no máximo.
+</p>
+<h2>Saída</h2>
+<p>
+  Para cada teste, seu programa deve imprimir uma única linha contendo um único inteiro indicando
+  a quantidade mínima de semanas que o campeonato vai durar.
+</p>
+<h2>Exemplos</h2>
+<table>
+  <tr>
+    <th>Entrada</th>
+    <th>Saída</th>
+  </tr>
+  <tr>
+    <td class="code">
+      <pre><code>3 2</code></pre>
+    </td>
+    <td  class="code">
+      <pre><code>2</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td class="code">
+      <pre><code>4 1</code></pre>
+    </td>
+    <td class="code">
+      <pre><code>12</code></pre>
+    </td>
+  </tr>
+</table>
+<h2>Explicação dos casos de teste</h2>
+<p>
+  No primeiro caso, existem 3 partidas possíveis, uma com cada um dos jogadores como Grão-vizir e os
+  outros dois como Duques. Com no máximo 2 partidas por semana, o mínimo de semanas que o campeonato
+  dura é 2.
+</p>
+<p>
+  No segunda caso, são 12 partidas, cada um dos 4 jogadores tem que ficar de fora, e pra cada um desses
+  tem 3 opções de Grão-vizir.
+</p>
